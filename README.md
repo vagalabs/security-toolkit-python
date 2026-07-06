@@ -17,8 +17,14 @@ A secure command-line password manager built in Python, using industry-standard 
 
 ## Setup
 ```bash
-pip install cryptography
+pip install -r requirements.txt
+cd password_manager
 python main.py
+```
+
+To run the standalone password generator:
+```bash
+python password_generator/password_generator.py --length 16
 ```
 
 ## Security notes

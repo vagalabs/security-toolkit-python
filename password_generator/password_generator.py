@@ -39,6 +39,9 @@ def main():
 
     args = parser.parse_args()
 
+    if args.length < 8:
+        parser.error("Password length must be at least 8 for a reasonable default.")
+
     password = generate_password(
         length=args.length,
         use_letters=not args.no_letters,

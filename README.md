@@ -28,3 +28,10 @@ This project is built for learning purposes and demonstrates secure password sto
 - Python 3
 - `cryptography` (Fernet, PBKDF2HMAC)
 - `secrets`, `getpass`, `json` (standard library)
+## Testing
+Unit tests cover the core encryption module (key derivation, encryption/decryption, wrong-password handling).
+
+```bash
+pip install pytest
+python -m pytest -v
+```

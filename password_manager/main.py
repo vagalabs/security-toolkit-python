@@ -1,5 +1,13 @@
 import getpass
 from vault import vault_exists, create_vault, load_vault, save_vault
+import secrets
+import string
+
+
+def generate_password(length: int = 16) -> str:
+    """Generate a secure random password."""
+    alphabet = string.ascii_letters + string.digits + string.punctuation
+    return "".join(secrets.choice(alphabet) for _ in range(length))
 
 
 def print_menu():
@@ -14,7 +22,16 @@ def print_menu():
 def add_entry(data: dict):
     site = input("Site/service name: ").strip()
     username = input("Username/email: ").strip()
-    password = getpass.getpass("Password: ")
+
+    choice = input("Generate a secure password automatically? (y/n): ").strip().lower()
+    if choice == "y":
+        length_input = input("Password length (default 16): ").strip()
+        length = int(length_input) if length_input.isdigit() else 16
+        password = generate_password(length)
+        print(f"Generated password: {password}")
+    else:
+        password = getpass.getpass("Password: ")
+
     data[site] = {"username": username, "password": password}
     print(f"Entry for '{site}' added.")
 

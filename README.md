@@ -1,32 +1,30 @@
-# 🔐 Security Toolkit (Python)
+# Password Manager
 
-A collection of cybersecurity tools developed in Python for learning, automation, and security assessments.
+A secure command-line password manager built in Python, using industry-standard encryption practices.
 
-## 🎯 Purpose
+## Features
+- Master password protects access to all stored credentials
+- Encryption via Fernet (AES-128) from the `cryptography` library
+- Master password never stored — a key is derived using PBKDF2-HMAC-SHA256 (390,000 iterations)
+- Add, view, list, and delete stored entries
+- Built-in secure password generator (uses Python's `secrets` module)
 
-This repository contains small but practical security tools that demonstrate Python programming skills and cybersecurity concepts.
+## How it works
+1. On first run, you set a master password. A random salt is generated and stored alongside the encrypted vault.
+2. Your master password + salt are used to derive an encryption key (the password itself is never saved).
+3. All entries (site, username, password) are stored in a single JSON blob, encrypted with that key.
+4. On future runs, you re-enter the master password to decrypt and access your vault.
 
-## 📦 Tools
+## Setup
+```bash
+pip install cryptography
+python main.py
+```
 
-- Password Generator
-- Hash Calculator
-- Port Scanner
-- DNS Lookup
-- SSL Certificate Checker
-- File Integrity Checker
-- Log Parser
-- WHOIS Lookup
-- IOC Checker
+## Security notes
+This project is built for learning purposes and demonstrates secure password storage practices (key derivation, salting, symmetric encryption). It is not intended for storing high-value production credentials — for that, use a well-audited tool like Bitwarden or KeePass.
 
-## 🛠 Tech Stack
-
+## Tech stack
 - Python 3
-- Standard Library
-- Git
-- GitHub
-
-## 📚 Status
-
-🚧 Work in Progress
-
-New tools are added regularly.
+- `cryptography` (Fernet, PBKDF2HMAC)
+- `secrets`, `getpass`, `json` (standard library)
